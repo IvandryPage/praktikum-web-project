@@ -1,5 +1,5 @@
   </main>
-  <footer class="bg-light text-center p-3">
+  <footer class="text-center p-3">
     <p>&copy; <?= date('Y') ?> Terahub. All rights reserved.</p>
   </footer>
 
