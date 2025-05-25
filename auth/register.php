@@ -24,27 +24,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include "../includes/header.php" ?>
 
 
-<form action="" method="POST">
-  <div class="row mb-3">
-    <label for="username" class="col-sm-2 col-form-label">Username</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="username" name="username">
-    </div>
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2>HELLO!!</h2>
+    <p>Please enter your data</p>
+    
+    <form method="POST" action="register.php">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username:</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+      <div class="mb-3">
+        <label for="password2" class="form-label">Konfirmasi Password:</label>
+        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+      </div>
+      <button type="submit" class="btn btn-success w-100">Register</button>
+    </form>
+    
   </div>
-  <div class="row mb-3">
-    <label for="password" class="col-sm-2 col-form-label">Password</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control" id="password" name="password">
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="confirm_password" class="col-sm-2 col-form-label">Konfirmasi Password</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control" id="confirm_password" name="confirm_password">
-    </div>
-  </div>
-  <button type="submit" name="register" class="btn btn-primary">Sign Up</button>
-</form>
+</div>
 
 
 
