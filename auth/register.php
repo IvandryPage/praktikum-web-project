@@ -8,14 +8,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($password === $confirm_password) {
     // $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $query = "INSERT INTO users(username, password, role) VALUES ('$username', '$password', 'user');";
+    $query = "SELECT * FROM users WHERE username = '$username'";
+    $user = mysqli_query($koneksi, $query);
 
+    if (!$user) {
+      $errormsg =
+        header("Location: login.php?register.php?errormsg" . urlencode($msg));
+    }
+
+    $query = "INSERT INTO users(username, password) VALUES ('$username', '$password');";
     $result = mysqli_query($koneksi, $query);
 
     if ($result) {
-      echo "<script>alert('Akun berhasil dibuat')</script>";
+      header("Location: login.php");
     } else {
-      echo "<script>alert('Akun gagal!')</script>";
+      $msg = "Username atau Password salah";
+      header("Location: register.php?errormsg=" . urlencode($msg));
     }
   }
 }
@@ -24,34 +32,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include "../includes/header.php" ?>
 
 
-<div class="auth-wrapper">
-  <div class="auth-card">
-    <h2>REGISTER</h2>
-    <p><?php if (isset($_GET['errormsg'])) {
-          echo $_GET['errormsg'];
-        } else {
-          echo 'Please enter your data.';
-        }
-        ?></p>
+<div class="min-vh-100 d-flex flex-column justify-content-center align-items-center">
+  <div class="register-card">
+    <h2 class="subheading text-center">REGISTER</h2>
+    <p class="message">
+      <?php
+      if (isset($_GET['errormsg'])) {
+        echo htmlspecialchars($_GET['errormsg']);
+      } else {
+        echo 'Please enter your data.';
+      }
+      ?>
+    </p>
 
-    <form method="POST" action="register.php">
+    <form method="POST" action="register.php" novalidate>
       <div class="mb-3">
         <label for="username" class="form-label">Username:</label>
-        <input type="text" class="form-control" id="username" name="username" required>
+        <input type="text" class="form-control" id="username" name="username" required autocomplete="username" />
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password:</label>
-        <input type="password" class="form-control" id="password" name="password" required>
+        <input type="password" class="form-control" id="password" name="password" required autocomplete="new-password" />
       </div>
       <div class="mb-3">
-        <label for="password2" class="form-label">Konfirmasi Password:</label>
-        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+        <label for="confirm_password" class="form-label">Confirm Password:</label>
+        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required autocomplete="new-password" />
       </div>
-      <button type="submit" class="btn btn-success w-100">Register</button>
+      <button type="submit" class="btn btn-register w-100">Register</button>
     </form>
 
-    <p class="text-center mt-3">Sudah punya akun? <a href="login.php">Klik di sini</a></p>
+    <p class="text-center mt-3">
+      Already have an account? <a href="login.php">Click here</a>
+    </p>
   </div>
+
 </div>
 
 

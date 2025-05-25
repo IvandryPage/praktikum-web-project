@@ -17,26 +17,27 @@ $result = mysqli_query($koneksi, $sql);
 
 <?php include '../includes/header.php' ?>
 
-<h1 class="mb-4">Marketplace</h1>
+<h1 class="mb-4 heading">Marketplace</h1>
 <div class="row">
   <?php while ($item = mysqli_fetch_assoc($result)) : ?>
     <div class="col-md-4 mb-3">
       <div class="card">
-        <img src="../assets/images/<?= $item['image_url'] ?>" class="card-img-top" alt="<?= $item['name'] ?>">
+        <img src="../assets/images/<?= $item['image_url'] ?>" class="item-img" alt="<?= $item['name'] ?>">
         <div class="card-body">
           <h5 class="card-title"><?= htmlspecialchars($item['name']) ?></h5>
-          <p class="card-text"><?= htmlspecialchars($item['description']) ?></p>
+          <p class="card-text line-clamp"><?= htmlspecialchars($item['description']) ?></p>
           <p class="card-text"><strong>Seller: </strong><?= htmlspecialchars($item['username']) ?></p>
           <p class="card-text"><strong>Price:</strong> <?= $item['price'] ?></p>
-          <input type="checkbox" name="buy-toggle" id="buy-toggle" hidden>
-          <label for="buy-toggle" class="btn btn-warning mb-2" style="cursor: pointer;"></label>
-          <form method="POST" action="../actions/buy.php">
+          <p class="card-text"><strong>Quantity:</strong> <?= $item['sale_quantity'] ?></p>
+          <input type="checkbox" name="buy-toggle" id="buy-toggle-<?= $item['item_id'] ?>" hidden>
+          <label class="buy-toggle-label text-center" for="buy-toggle-<?= $item['item_id'] ?>" class="btn btn-warning mb-2" style="cursor: pointer;"></label>
+          <form method="POST" action="../actions/buy.php" class="d-flex gap-5">
             <input type="hidden" name="item_id" value="<?= $item['item_id'] ?>">
             <input type="hidden" name="price" value="<?= $item['price'] ?>">
             <input type="hidden" name="seller_id" value="<?= $item['user_id'] ?>">
-            <input type="number" name="quantity" id="quantity" max="$item['sale_quantity']">
+            <input type="number" name="quantity" id="quantity" max="$item['sale_quantity']" class="form-control" placeholder="Quantity">
             <?php if ($item['user_id'] !== $_SESSION['user_id']) : ?>
-              <button class="btn btn-primary" type="submit">Confirm</button>
+              <button class="btn btn-register" type="submit">Confirm</button>
             <?php endif; ?>
           </form>
         </div>

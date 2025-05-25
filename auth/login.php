@@ -14,21 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       session_start();
       $_SESSION['user_id'] = $data['id'];
       $_SESSION['username'] = $data['username'];
-      $_SESSION['role'] = $data['role'];
 
       if (isset($_SESSION['redirect_url'])) {
         $redirect = $_SESSION['redirect_url'];
         header("Location: $redirect");
-      } else if ($_SESSION['role'] === 'user') {
-        header("Location: ../pages/homepage.php");
-      } else if ($_SESSION['role'] === 'admin') {
-        header("Location: ../admin/dashboard.php");
       } else {
-        header("Location: ../pages/login.php");
+        header("Location: ../pages/homepage.php");
       }
       exit();
-    } else {
-      echo "pass salah";
     }
   }
 }
@@ -36,15 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php include "../includes/header.php" ?>
 
-<div class="auth-wrapper">
-  <div class="auth-card">
-    <h2>LOG IN</h2>
-    <p><?php if (isset($_GET['errormsg'])) {
-          echo $_GET['errormsg'];
-        } else {
-          echo 'Please enter your data.';
-        }
-        ?></p>
+<div class="min-vh-100 d-flex flex-column justify-content-center align-items-center">
+  <div class="register-card">
+    <h2 class="subheading text-center">LOG IN</h2>
+    <p class="message"><?php if (isset($_GET['errormsg'])) {
+                          echo $_GET['errormsg'];
+                        } else {
+                          echo 'Please enter your data.';
+                        }
+                        ?></p>
     <form method="POST" action="">
       <div class="mb-3">
         <label for="username" class="form-label">Username:</label>

@@ -1,122 +1,289 @@
+:root {
+  --color-background: #1a1a1d;
+  --color-surface: #2a2a2d;
+  --color-text: #e0e0e0;
+  --color-heading: #b22222;
+  --color-accent: #ffd700;
+  --color-accent-secondary: #2e8b57;
+  --color-accent-tertiary: #6a0dad;
+
+  --button-primary-bg: #ffd700;
+  --button-primary-text: #1a1a1d;
+
+  --button-secondary-bg: #b22222;
+  --button-secondary-text: #ffffff;
+
+  --link-color: #ffd700;
+  --link-hover: #b22222;
+
+  --border-glow: rgba(255, 215, 0, 0.2);
+  --hover-glow: rgba(106, 13, 173, 0.3);
+}
+
 * {
   margin: 0;
   padding: 0;
 }
 
-header,
-footer {
-  min-height: 4vh;
-}
-
-main {
-  min-height: 92vh;
-}
-
-.main-page {
-  min-height: 92vh;
-}
-
-#sell-toggle,
-#sell-toggle ~ form {
-  display: none;
-}
-
-#sell-toggle:checked ~ form {
-  display: block;
-}
-
-label[for="sell-toggle"]::before {
-  content: "Sell Item";
-}
-
-#sell-toggle:checked + label[for="sell-toggle"]::before {
-  content: "Cancel";
-}
-
-/* === Umum === */
 body {
-  background-color: #f2f5f9;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-size: 14pt;
+  font-family: "Cardo", sans-serif;
 }
 
-/* === Form Login dan Register === */
-.auth-wrapper {
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.navbar-brand {
+  font-family: "Uncial Antiqua", cursive;
+  font-size: 20pt;
 }
 
-.auth-card {
-  background: #ffffff;
-  padding: 2rem;
+.nav-link,
+.navbar-brand {
+  color: var(--link-color);
+  transition: color 0.3s ease;
+}
+
+.active {
+  color: var(--link-color) !important;
+  text-shadow: 0 0 20px;
+}
+
+.navbar-brand:hover {
+  color: var(--color-text);
+}
+
+.nav-link:hover {
+  color: var(--link-hover);
+  text-shadow: 0 0 10px;
+}
+
+.heading {
+  font-family: "Cinzel", sans-serif;
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: var(--color-heading);
+}
+
+.tagline {
+  font-size: 1.5rem;
+}
+
+footer {
+  font-size: 10pt;
+}
+
+.btn-primary {
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 0 8px var(--border-glow);
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #e6c200;
+  border: none;
+  color: var(--button-primary-text);
+  box-shadow: 0 0 12px var(--border-glow);
+}
+
+.btn-secondary {
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 0 8px var(--border-glow);
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #a11a1a;
+  border: none;
+  color: var(--button-secondary-text);
+  box-shadow: 0 0 12px var(--border-glow);
+}
+
+.register-card {
+  background: var(--color-surface);
+  border: 2px solid var(--color-accent);
+  border-radius: 1rem;
+  padding: 2.5rem 2rem;
   width: 100%;
   max-width: 400px;
-  border-radius: 1rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px var(--border-glow);
 }
 
-.auth-card h2 {
-  text-align: center;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.auth-card p {
-  text-align: center;
-  color: #777;
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
-}
-
-.auth-card .form-label {
+label {
+  color: var(--color-text);
   font-weight: 600;
-  font-size: 0.9rem;
 }
 
-.auth-card .btn {
-  width: 100%;
-  font-weight: bold;
-  padding: 10px;
+.form-control {
+  background-color: #1f1f21;
+  border: 1.5px solid var(--color-accent);
+  color: var(--color-text);
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* === Marketplace Card (sebelumnya) === */
-.card {
+.form-control:focus {
+  border-color: var(--color-accent-secondary);
+  box-shadow: 0 0 8px var(--color-accent-secondary);
+  background-color: #222;
+  color: var(--color-text);
+}
+
+.btn-register {
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
   border: none;
-  border-radius: 1rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease-in-out;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px var(--color-accent);
+}
+
+.btn-register:hover,
+.btn-register:focus {
+  background-color: var(--color-accent-secondary);
+  color: var(--button-primary-text);
+  box-shadow: 0 0 15px var(--hover-glow);
+  filter: brightness(1.1);
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--link-hover);
+  text-decoration: none;
+}
+
+.message {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  color: var(--color-accent);
+  text-shadow: 0 0 3px var(--color-accent);
+}
+
+.subheading {
+  font-family: "Uncial Antiqua", cursive;
+}
+
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--border-glow);
+  box-shadow: 1px 1px 0px var(--border-glow);
+  transition: box-shadow 0.3 ease;
+  color: var(--color-text);
+  padding: 10px 0;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 5px 5px 4px var(--border-glow);
 }
 
-.card-img-top {
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  height: 200px;
-  object-fit: cover;
+.card:hover .item-img {
+  transform: translateY(-15px) translateX(-5px);
+  transition: all 0.3s ease-in-out;
 }
 
-.card-title {
-  font-weight: 600;
-  font-size: 1.2rem;
-  color: #333;
+.item-img {
+  height: 180px;
+  width: 100%;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
-.card-text {
-  color: #555;
-  font-size: 0.95rem;
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 }
 
-h1 {
-  font-weight: 700;
-  font-size: 2.5rem;
-  color: #222;
-  margin-bottom: 30px;
-  text-align: center;
+.card-body > * {
+  margin-bottom: 0.5rem;
+}
+
+input[type="checkbox"] + label + form {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in, opacity 0.3s ease;
+}
+
+input[type="checkbox"]:checked + label + form {
+  max-height: 100%;
+  opacity: 1;
+  margin-top: 1rem;
+}
+
+.buy-toggle-label {
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  transition: background-color 0.1s, color 0.3s;
+}
+
+.buy-toggle-label:before {
+  content: "Buy Item";
+}
+
+input[type="checkbox"]:checked + .buy-toggle-label:before {
+  content: "Cancel";
+}
+
+input[type="checkbox"]:checked + .buy-toggle-label {
+  background-color: var(--color-accent-tertiary);
+  color: white;
+  box-shadow: 0 0 8px var(--hover-glow);
+}
+
+.line-clamp {
+  display: -webkit-box;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line-clamp:hover {
+  line-clamp: unset;
+  -webkit-line-clamp: unset;
+}
+
+.profile-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--border-glow);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  color: var(--color-text);
+}
+
+.profile-heading {
+  color: var(--color-heading);
+  font-weight: bold;
+}
+
+.profile-info {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.profile-info .label {
+  color: var(--color-accent);
+  margin-right: 0.5rem;
+}
+
+.profile-info .value {
+  font-weight: 500;
 }
