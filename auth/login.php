@@ -16,7 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $_SESSION['username'] = $data['username'];
       $_SESSION['role'] = $data['role'];
 
-      if ($_SESSION['role'] === 'user') {
+      if (isset($_SESSION['redirect_url'])) {
+        $redirect = $_SESSION['redirect_url'];
+        header("Location: $redirect");
+      } else if ($_SESSION['role'] === 'user') {
         header("Location: ../pages/homepage.php");
       } else if ($_SESSION['role'] === 'admin') {
         header("Location: ../admin/dashboard.php");
@@ -35,8 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="auth-wrapper">
   <div class="auth-card">
-    <h2>WELLCOME!</h2>
-    <p>Masukan Username dan Password</p>
+    <h2>LOG IN</h2>
+    <p><?php if (isset($_GET['errormsg'])) {
+          echo $_GET['errormsg'];
+        } else {
+          echo 'Please enter your data.';
+        }
+        ?></p>
     <form method="POST" action="">
       <div class="mb-3">
         <label for="username" class="form-label">Username:</label>

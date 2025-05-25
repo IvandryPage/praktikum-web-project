@@ -4,6 +4,7 @@ include '../includes/koneksi.php';
 include '../includes/header.php';
 
 if (!isset($_SESSION['user_id'])) {
+  $_SESSION['redirect_url'] = $_SERVER['PHP_SELF'];
   header("Location: ../auth/login.php");
   exit;
 }
@@ -37,11 +38,14 @@ $result = mysqli_query($koneksi, $sql);
               </form>
             <?php else : ?>
               <p class="card-text"><strong>Status:</strong> Not For Sale </p>
+
+              <input type="checkbox" name="sell-toggle" id="sell-toggle" hidden>
+              <label for="sell-toggle" class="btn btn-warning mb-2" style="cursor: pointer;"></label>
               <form method="POST" action="../actions/sell.php">
                 <input type="hidden" name="item_id" value="<?= $item['item_id'] ?>">
                 <input type="number" name="price" class="form-control mb-2" placeholder="Set price" required>
                 <input type="number" name="sale_quantity" class="form-control mb-2" placeholder="Set Quantity" max="<?= $item['quantity'] ?>" required>
-                <button class=" btn btn-warning" type="submit">Sell</button>
+                <button class=" btn btn-warning" type="submit">Confirm</button>
               </form>
             <?php endif; ?>
           </div>

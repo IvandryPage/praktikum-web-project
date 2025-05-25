@@ -26,9 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="auth-wrapper">
   <div class="auth-card">
-    <h2>HELLO!!</h2>
-    <p>Please enter your data</p>
-    
+    <h2>REGISTER</h2>
+    <p><?php if (isset($_GET['errormsg'])) {
+          echo $_GET['errormsg'];
+        } else {
+          echo 'Please enter your data.';
+        }
+        ?></p>
+
     <form method="POST" action="register.php">
       <div class="mb-3">
         <label for="username" class="form-label">Username:</label>
@@ -44,7 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
       <button type="submit" class="btn btn-success w-100">Register</button>
     </form>
-    
+
+    <p class="text-center mt-3">Sudah punya akun? <a href="login.php">Klik di sini</a></p>
   </div>
 </div>
 
